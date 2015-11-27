@@ -1,0 +1,3 @@
+Things we've done:
+11/18 - Tried our data on our own learners. We had problems with compatability with most models. MLP gave weird results (accuracy 2.something). K-nn gave results at around .2. We used 10 fold CV.
+11/23 - Messing around with scikit-learn. We'll see if it is a good library.

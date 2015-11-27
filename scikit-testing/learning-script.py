@@ -1,0 +1,48 @@
+print(__doc__)
+
+# Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
+#         Fabian Pedregosa <fabian.pedregosa@inria.fr>
+#
+# License: BSD 3 clause (C) INRIA
+
+
+###############################################################################
+# Generate sample data
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import neighbors
+# from sklearn import datasets
+
+# housingData = datasets.load_boston()
+# print housingData
+np.random.seed(0)
+X = np.sort(5 * np.random.rand(40, 1), axis=0)
+T = np.linspace(0, 5, 500)[:, np.newaxis]
+y = np.sin(X).ravel()
+
+# Add noise to targets
+y[::5] += 1 * (0.5 - np.random.rand(8))
+
+###############################################################################
+# Fit regression model
+n_neighbors = 5
+
+print X
+print "\n\n\n\n\n=======================================================================\n\n\n\n\n"
+print y
+print "\n\n\n\n\n=======================================================================\n\n\n\n\n"
+print T
+
+for i, weights in enumerate(['uniform', 'distance']):
+    knn = neighbors.KNeighborsRegressor(n_neighbors, weights=weights)
+    y_ = knn.fit(X, y).predict(T)
+
+    plt.subplot(2, 1, i + 1)
+    plt.scatter(X, y, c='k', label='data')
+    plt.plot(T, y_, c='g', label='prediction')
+    plt.axis('tight')
+    plt.legend()
+    plt.title("KNeighborsRegressor (k = %i, weights = '%s')" % (n_neighbors,
+                                                                weights))
+
+plt.show()

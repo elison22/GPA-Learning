@@ -36,6 +36,10 @@ class DataSet:
 		self.tstLabNm = "test-labels"
 		self.dsets = { self.trFeatNm : features, self.trLabNm : labels }
 
+	# parameter: setName = the name of the data group that you want to get. The names are listed in
+	# 						the DataSet constructor
+	# return: the data group corrosponding to the parameter you passed in.
+
 	def getSet(self, setName):
 		return self.dsets[setName]
 
@@ -73,14 +77,14 @@ class DataSet:
 		self.dsets[self.trFeatNm] = splitResult[2]
 		self.dsets[self.trLabNm] = splitResult[3]
 
-	# def splitToFolds(self, foldCount, foldRatio, seed = -1):
-	# 	folds = []
-	# 	if(seed != -1):
-	# 		random.seed(seed)
+	def splitToFolds(self, foldCount, foldRatio, seed = -1):
+		folds = []
+		if(seed != -1):
+			random.seed(seed)
 
-	# 	while(len(folds) < foldCount):
-	# 		split = splitData
-	# 		folds.append([split])
+		while(len(folds) < foldCount):
+			split = splitData
+			folds.append([split])
 
 	
 
